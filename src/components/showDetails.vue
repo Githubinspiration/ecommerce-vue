@@ -1,43 +1,86 @@
 <template>
   <div>
-    github profile details
+    <h1>Github profile details</h1>
+
     <div v-show="loading">
       loading
     </div>
-    <div v-if="!loading && data.data">
-      <span> Name: {{ data.data.name }} <br /> </span
-      ><span> company: {{ data.data.company }} <br /> </span
-      ><span> location: {{ data.data.location }} <br /> </span
-      ><span> public_repos: {{ data.data.public_repos }} <br /> </span
-      ><span> following: {{ data.data.following }}<br /> </span
-      ><span v-show="data.data.followers">
-        followers: {{ data.data.followers }}<br /> </span
-      ><span>
-        joined github: {{ new Date(data.data.created_at).toString()
-        }}<br /> </span
-      ><span>
-        last commit: {{ new Date(data.data.updated_at).toString("MMMM yyyy")
-        }}<br />
+    <div class="centerSty" v-if="!loading && data.data">
+      <vs-card type="3">
+        <template #title>
+          <h3>{{ data.data.name || data.data.login }}</h3>
+        </template>
+        <template #img>
+          <img :src="data.data.avatar_url" alt="" />
+        </template>
+        <template #text>
+          <p>{{ data.data.company }} . {{ data.data.location }}</p>
+          <span> following: {{ data.data.following }}<br /> </span
+          ><span v-show="data.data.followers">
+            followers: {{ data.data.followers }}<br />
+          </span>
+          <span> public repos: {{ data.data.public_repos }} <br /> </span>
+        </template>
+      </vs-card>
+
+      <span>
+        <b>joined github:</b>
+        {{ joined }}
+        <br />
       </span>
+      <span> <b>last commit:</b> {{ lastCommit }} <br /> </span>
     </div>
   </div>
 </template>
 
 <script>
+import moment from "moment";
 export default {
   name: "Details",
   props: {
     data: Object,
     loading: Boolean,
   },
-  methods: {},
+  methods: {
+    formatDate(d) {
+      return moment(new Date(d)).format("MMMM Do YYYY, h:mm:ss a");
+    },
+  },
+  data() {
+    return { lastCommit: "", joined: "" };
+  },
   computed: {
     show() {
       console.log("this.loading: ", this.loading);
       return this.loading;
     },
+    joinedDate() {
+      return moment(new Date(this.data.data.created_at)).format(
+        "MMMM Do YYYY, h:mm:ss a"
+      );
+    },
+  },
+  watch: {
+    data: {
+      handler() {
+        this.joined = this.formatDate(this.data.data.created_at);
+        this.lastCommit = this.formatDate(this.data.data.updated_at);
+      },
+      deep: true,
+      immediate: true,
+    },
   },
 };
 </script>
 
-<style></style>
+<style>
+.centerSty {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: brown;
+  display: grid;
+  height: 100%;
+  padding: 30px 0px;
+}
+</style>

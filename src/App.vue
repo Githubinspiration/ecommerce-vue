@@ -1,16 +1,25 @@
 <template>
-  <div>
+  <div style="background-color:yellow ; height:100%;">
     <Header />
-    <div>madeel20</div>
-    <div>owais897</div>
 
-    <input
-      type="text"
-      v-model="getId"
-      name="text"
-      placeholder="Enter Github Id"
-    />
-    <button @click.prevent="onSubmit">submit</button>
+    <div class="center content-inputs ">
+      <div style="display:flex;  justify-content: center;">
+        <div>madeel20</div>
+        <div>owais897</div>
+      </div>
+
+      <br />
+      <div class="inputField">
+        <vs-input
+          type="text"
+          v-model="getId"
+          name="text"
+          placeholder="Enter Github Id"
+          color="#7d33ff"
+        />
+        <vs-button @click.prevent="onSubmit">submit</vs-button>
+      </div>
+    </div>
 
     <ShowDetails :data="data" :loading="loading" />
   </div>
@@ -59,4 +68,19 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+.inputField {
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 50px;
+}
+</style>
