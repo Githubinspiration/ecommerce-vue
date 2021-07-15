@@ -1,28 +1,62 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <Header />
+    <div>madeel20</div>
+    <div>owais897</div>
+
+    <input
+      type="text"
+      v-model="getId"
+      name="text"
+      placeholder="Enter Github Id"
+    />
+    <button @click.prevent="onSubmit">submit</button>
+
+    <ShowDetails :data="data" :loading="loading" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Header from "./components/Header.vue";
+import ShowDetails from "./components/showDetails.vue";
+import axios from "axios";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    Header,
+    ShowDetails,
+  },
+  data() {
+    return {
+      getId: "",
+      data: {},
+      loading: false,
+    };
+  },
+  methods: {
+    async onSubmit() {
+      this.loading = true;
+      console.log("trigger submit");
+
+      if (!this.getId) {
+        alert("Please add a id");
+        return;
+      }
+      let data = await this.getUserData(this.getId);
+
+      console.log("data: ", data);
+      setTimeout(() => {
+        //your code to be executed after 1 second
+        this.loading = false;
+      }, 1000);
+      this.data = data;
+    },
+    async getUserData(id) {
+      let data = await axios.get(`https://api.github.com/users/${id}`);
+      return data;
+    },
+  },
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
