@@ -23,12 +23,12 @@
         </template>
       </vs-card>
 
-      <span>
-        <b>joined github:</b>
+      <span style="margin-top:10px">
+        <b>Joined github:</b>
         {{ joined }}
         <br />
       </span>
-      <span> <b>last commit:</b> {{ lastCommit }} <br /> </span>
+      <span> <b>Last commit:</b> {{ lastCommit }} <br /> </span>
     </div>
   </div>
 </template>
@@ -78,7 +78,7 @@ export default {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-color: brown;
+  /* background-color: brown; */
   display: grid;
   height: 100%;
   padding: 30px 0px;

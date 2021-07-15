@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color:yellow ; height:100%;">
+  <div class="main" style=" height:100vh;">
     <Header />
 
     <div class="center content-inputs ">
@@ -82,5 +82,9 @@ export default {
   justify-content: center;
   font-size: 20px;
   margin-bottom: 50px;
+}
+.main {
+  background-color: #f5f2e2;
+  /* background-image: url("https://github.githubassets.com/images/modules/site/home/globe.jpg"); */
 }
 </style>
