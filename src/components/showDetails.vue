@@ -49,17 +49,7 @@ export default {
   data() {
     return { lastCommit: "", joined: "" };
   },
-  computed: {
-    show() {
-      console.log("this.loading: ", this.loading);
-      return this.loading;
-    },
-    joinedDate() {
-      return moment(new Date(this.data.data.created_at)).format(
-        "MMMM Do YYYY, h:mm:ss a"
-      );
-    },
-  },
+  computed: {},
   watch: {
     data: {
       handler() {
