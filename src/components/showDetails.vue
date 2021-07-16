@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Github profile details</h1>
+    <!-- <h1>Github profile details</h1> -->
 
     <div v-show="loading">
       loading
@@ -30,25 +30,34 @@
       </span>
       <span> <b>Last commit:</b> {{ lastCommit }} <br /> </span>
     </div>
+    <Details :data="data" @new-search="method1($event, data)" />
   </div>
 </template>
 
 <script>
 import moment from "moment";
+import Details from "./Details.vue";
 export default {
-  name: "Details",
+  name: "showCard",
   props: {
     data: Object,
     loading: Boolean,
+  },
+  components: {
+    Details,
   },
   methods: {
     formatDate(d) {
       return moment(new Date(d)).format("MMMM Do YYYY, h:mm:ss a");
     },
+    method1(id) {
+      this.$emit("new-search2", id);
+    },
   },
   data() {
     return { lastCommit: "", joined: "" };
   },
+  emits: ["new-search2"],
   computed: {},
   watch: {
     data: {
@@ -57,7 +66,7 @@ export default {
         this.lastCommit = this.formatDate(this.data.data.updated_at);
       },
       deep: true,
-      immediate: true,
+      // immediate: true,
     },
   },
 };

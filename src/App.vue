@@ -21,7 +21,11 @@
       </div>
     </div>
 
-    <ShowDetails :data="data" :loading="loading" />
+    <ShowDetails
+      @new-search2="method2($event, data)"
+      :data="data"
+      :loading="loading"
+    />
   </div>
 </template>
 
@@ -59,6 +63,10 @@ export default {
         this.loading = false;
       }, 1000);
       this.data = data;
+    },
+    method2(id) {
+      this.getId = id;
+      this.onSubmit();
     },
     async getUserData(id) {
       let data = await axios.get(`https://api.github.com/users/${id}`);
