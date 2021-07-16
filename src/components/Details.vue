@@ -9,7 +9,7 @@
       </vs-navbar-item>
     </vs-navbar>
     <div class="bottomDetails">
-      <vs-card-group>
+      <vs-card-group v-show="following.length > 0">
         <vs-card
           :key="index"
           v-for="(data, index) in following"

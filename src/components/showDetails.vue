@@ -13,10 +13,8 @@
         </template>
         <template #text>
           <p>{{ data.data.company }} . {{ data.data.location }}</p>
-          <span> following: {{ data.data.following }}<br /> </span
-          ><span v-show="data.data.followers">
-            followers: {{ data.data.followers }}<br />
-          </span>
+          <span> followers: {{ data.data.followers }}<br /> </span>
+          <span> following: {{ data.data.following }}<br /> </span>
           <span> public repos: {{ data.data.public_repos }} <br /> </span>
         </template>
       </vs-card>
