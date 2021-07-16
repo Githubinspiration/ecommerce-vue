@@ -29,7 +29,11 @@
       </span>
       <span> <b>Last commit:</b> {{ lastCommit }} <br /> </span>
     </div>
-    <Details :data="data" @new-search="showThisUser($event, data)" />
+    <Details
+      v-show="showBar"
+      :data="data"
+      @new-search="showThisUser($event, data)"
+    />
   </div>
 </template>
 
@@ -44,6 +48,11 @@ export default {
   },
   components: {
     Details,
+  },
+  computed: {
+    showBar() {
+      return this.data?.data?.login ? true : false;
+    },
   },
   methods: {
     formatDate(d) {
