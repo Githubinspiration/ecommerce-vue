@@ -65,6 +65,7 @@ export default {
       window.open(link, "_blank");
     },
     viewthisProfile(id) {
+      this.following = [];
       this.$emit("new-search", id);
     },
   },
