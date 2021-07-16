@@ -9,23 +9,26 @@
       </vs-navbar-item>
     </vs-navbar>
     <div class="bottomDetails">
-      <ul id="example-2">
-        <li :key="index" v-for="(data, index) in following">
-          <vs-card @click="viewthisProfile(data.login)" type="3">
-            <template #title>
-              <h3>{{ data.name || data.login }}</h3>
-            </template>
-            <template #img>
-              <img :src="data.avatar_url" alt="" />
-            </template>
-            <template #text>
-              <a @click.prevent="myFunction(data.html_url)">
-                view github <br />
-              </a>
-            </template>
-          </vs-card>
-        </li>
-      </ul>
+      <vs-card-group>
+        <vs-card
+          :key="index"
+          v-for="(data, index) in following"
+          @click="viewthisProfile(data.login)"
+          type="4"
+        >
+          <template #title>
+            <h3>{{ data.name || data.login }}</h3>
+          </template>
+          <template #img>
+            <img :src="data.avatar_url" alt="" />
+          </template>
+          <template #text>
+            <a @click.prevent="myFunction(data.html_url)">
+              view github <br />
+            </a>
+          </template>
+        </vs-card>
+      </vs-card-group>
     </div>
 
     <div>
