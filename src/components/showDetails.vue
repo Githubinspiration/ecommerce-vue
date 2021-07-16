@@ -1,7 +1,5 @@
 <template>
   <div>
-    <!-- <h1>Github profile details</h1> -->
-
     <div v-show="loading">
       loading
     </div>
@@ -66,7 +64,6 @@ export default {
         this.lastCommit = this.formatDate(this.data.data.updated_at);
       },
       deep: true,
-      // immediate: true,
     },
   },
 };

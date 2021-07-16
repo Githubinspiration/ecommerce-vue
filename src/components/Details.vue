@@ -27,7 +27,7 @@
         </li>
       </ul>
     </div>
-    {{ following }}
+
     <div>
       55555555555555555555555555
     </div>
@@ -47,17 +47,11 @@ export default {
     following: [],
     userName: undefined,
   }),
-  updated() {
-    // console.log("previos: ", this.active);
-    // this.getFollowing();
-  },
+  updated() {},
   async mounted() {
-    console.log("trigger mounted");
     await this.getFollowing();
   },
-  created() {
-    console.log("trigger created", this.data);
-  },
+  created() {},
   methods: {
     async getFollowing() {
       let res = await axios(
@@ -69,22 +63,20 @@ export default {
       window.open(link, "_blank");
     },
     viewthisProfile(id) {
-      console.log("trigger new search");
       this.$emit("new-search", id);
     },
   },
   watch: {
-    active(ne, previos) {
-      console.log("previos: ", previos);
-      console.log("ne: ", ne);
-    },
+    // active(ne, previos) {
+    //   console.log("previos: ", previos);
+    //   console.log("ne: ", ne);
+    // },
     data: {
       handler() {
         console.log("in data changeeeeeeeeeeee");
         this.getFollowing();
       },
       deep: true,
-      // immediate: true,
     },
   },
 };
