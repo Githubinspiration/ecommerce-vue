@@ -30,9 +30,6 @@
         </vs-card>
       </vs-card-group>
     </div>
-    <div>
-      55555555555555555555555555
-    </div>
   </div>
 </template>
 
@@ -47,13 +44,10 @@ export default {
   data: () => ({
     active: "followers",
     following: [],
-    userName: undefined,
   }),
-  updated() {},
   async mounted() {
     await this.getFollowers();
   },
-  created() {},
   methods: {
     async getFollowing() {
       let res = await axios(

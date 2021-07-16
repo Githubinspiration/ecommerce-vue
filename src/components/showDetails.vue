@@ -60,7 +60,6 @@ export default {
     return { lastCommit: "", joined: "" };
   },
   emits: ["new-search"],
-  computed: {},
   watch: {
     data: {
       handler() {
