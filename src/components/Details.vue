@@ -49,13 +49,19 @@ export default {
   }),
   updated() {},
   async mounted() {
-    await this.getFollowing();
+    await this.getFollowers();
   },
   created() {},
   methods: {
     async getFollowing() {
       let res = await axios(
         `https://api.github.com/users/${this.data?.data?.login}/following`
+      );
+      this.following = res.data;
+    },
+    async getFollowers() {
+      let res = await axios(
+        `https://api.github.com/users/${this.data?.data?.login}/followers`
       );
       this.following = res.data;
     },
@@ -67,14 +73,20 @@ export default {
     },
   },
   watch: {
-    // active(ne, previos) {
-    //   console.log("previos: ", previos);
-    //   console.log("ne: ", ne);
-    // },
+    async active(ne, previos) {
+      console.log("previos: ", previos);
+      console.log("ne: ", ne);
+      if (ne === "followers") {
+        await this.getFollowers();
+      } else if (ne === "following") {
+        await this.getFollowing();
+      }
+    },
     data: {
-      handler() {
+      async handler() {
         console.log("in data changeeeeeeeeeeee");
-        this.getFollowing();
+        await this.getFollowers();
+        this.active = "followers";
       },
       deep: true,
     },
