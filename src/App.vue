@@ -22,7 +22,7 @@
     </div>
 
     <ShowDetails
-      @new-search2="showThisUser($event, data)"
+      @new-search="showThisUser($event, data)"
       :data="data"
       :loading="loading"
     />

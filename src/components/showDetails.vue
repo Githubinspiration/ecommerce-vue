@@ -16,6 +16,9 @@
           <span> followers: {{ data.data.followers }}<br /> </span>
           <span> following: {{ data.data.following }}<br /> </span>
           <span> public repos: {{ data.data.public_repos }} <br /> </span>
+          <a @click.prevent="openUrlInNewTab(data.data.html_url)">
+            goto github <br />
+          </a>
         </template>
       </vs-card>
 
@@ -26,7 +29,7 @@
       </span>
       <span> <b>Last commit:</b> {{ lastCommit }} <br /> </span>
     </div>
-    <Details :data="data" @new-search="method1($event, data)" />
+    <Details :data="data" @new-search="showThisUser($event, data)" />
   </div>
 </template>
 
@@ -46,14 +49,17 @@ export default {
     formatDate(d) {
       return moment(new Date(d)).format("MMMM Do YYYY, h:mm:ss a");
     },
-    method1(id) {
-      this.$emit("new-search2", id);
+    showThisUser(id) {
+      this.$emit("new-search", id);
+    },
+    openUrlInNewTab: function(link) {
+      window.open(link, "_blank");
     },
   },
   data() {
     return { lastCommit: "", joined: "" };
   },
-  emits: ["new-search2"],
+  emits: ["new-search"],
   computed: {},
   watch: {
     data: {

@@ -23,14 +23,13 @@
             <img :src="data.avatar_url" alt="" />
           </template>
           <template #text>
-            <a @click.prevent="myFunction(data.html_url)">
+            <a @click.prevent="openUrlInNewTab(data.html_url)">
               view github <br />
             </a>
           </template>
         </vs-card>
       </vs-card-group>
     </div>
-
     <div>
       55555555555555555555555555
     </div>
@@ -68,7 +67,7 @@ export default {
       );
       this.following = res.data;
     },
-    myFunction: function(link) {
+    openUrlInNewTab: function(link) {
       window.open(link, "_blank");
     },
     viewthisProfile(id) {
@@ -76,9 +75,7 @@ export default {
     },
   },
   watch: {
-    async active(ne, previos) {
-      console.log("previos: ", previos);
-      console.log("ne: ", ne);
+    async active(ne) {
       if (ne === "followers") {
         await this.getFollowers();
       } else if (ne === "following") {
@@ -87,7 +84,6 @@ export default {
     },
     data: {
       async handler() {
-        console.log("in data changeeeeeeeeeeee");
         await this.getFollowers();
         this.active = "followers";
       },
