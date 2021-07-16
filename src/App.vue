@@ -22,7 +22,7 @@
     </div>
 
     <ShowDetails
-      @new-search2="method2($event, data)"
+      @new-search2="showThisUser($event, data)"
       :data="data"
       :loading="loading"
     />
@@ -48,23 +48,19 @@ export default {
   },
   methods: {
     async onSubmit() {
-      this.loading = true;
-      console.log("trigger submit");
-
       if (!this.getId) {
         alert("Please add a id");
         return;
       }
+      this.loading = true;
       let data = await this.getUserData(this.getId);
-
-      console.log("data: ", data);
       setTimeout(() => {
         //your code to be executed after 1 second
         this.loading = false;
       }, 1000);
       this.data = data;
     },
-    method2(id) {
+    showThisUser(id) {
       this.getId = id;
       this.onSubmit();
     },
