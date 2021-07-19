@@ -71,16 +71,18 @@ export default {
   },
   watch: {
     async active(newActiveValue) {
-      if (newActiveValue === "followers") {
-        await this.getFollowers();
+      if (newActiveValue === "dataChanged") {
+        this.active = "followers";
       } else if (newActiveValue === "following") {
         await this.getFollowing();
+      } else {
+        await this.getFollowers();
       }
     },
     data: {
       async handler() {
         // await this.getFollowers();
-        this.active = "followers";
+        this.active = "dataChanged";
       },
       deep: true,
     },
