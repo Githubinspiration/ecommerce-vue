@@ -50,12 +50,14 @@ export default {
   },
   methods: {
     async getFollowing() {
+      this.following = [];
       let res = await axios(
         `https://api.github.com/users/${this.data?.data?.login}/following`
       );
       this.following = res.data;
     },
     async getFollowers() {
+      this.following = [];
       let res = await axios(
         `https://api.github.com/users/${this.data?.data?.login}/followers`
       );
