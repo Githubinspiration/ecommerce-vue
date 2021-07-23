@@ -13,8 +13,6 @@
         </template>
         <template #text>
           <p>{{ data.data.company }} . {{ data.data.location }}</p>
-          <span> followers: {{ data.data.followers }}<br /> </span>
-          <span> following: {{ data.data.following }}<br /> </span>
           <span> public repos: {{ data.data.public_repos }} <br /> </span>
           <a @click.prevent="openUrlInNewTab(data.data.html_url)">
             goto github <br />

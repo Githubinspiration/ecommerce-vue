@@ -2,10 +2,10 @@
   <div class="center examplex " style="position:relative; ">
     <vs-navbar v-model="active">
       <vs-navbar-item :active="active == 'followers'" id="followers">
-        followers
+        followers ({{ follow || 0 }})
       </vs-navbar-item>
       <vs-navbar-item :active="active == 'following'" id="following">
-        following
+        following ({{ followed || 0 }})
       </vs-navbar-item>
     </vs-navbar>
     <div class="bottomDetails">
@@ -41,14 +41,23 @@ export default {
     data: Object,
     loading: Boolean,
   },
-  data: () => ({
-    active: "followers",
-    following: [],
-  }),
+  data() {
+    return {
+      active: "followers",
+      following: [],
+      follow: 0,
+      followed: 0,
+    };
+  },
   async mounted() {
     await this.getFollowers();
+    this.updateFollow();
   },
   methods: {
+    updateFollow() {
+      this.follow = this?.data?.data?.followers || 0;
+      this.followed = this?.data?.data?.following || 0;
+    },
     async getFollowing() {
       this.following = [];
       let res = await axios(
@@ -85,6 +94,7 @@ export default {
       async handler() {
         // await this.getFollowers();
         this.active = "dataChanged";
+        this.updateFollow();
       },
       deep: true,
     },
